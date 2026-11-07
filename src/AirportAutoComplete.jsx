@@ -1,7 +1,4 @@
 
-
-
-
 import { useState } from "react";
 import AirportLookup from "./AirportLookup";
 
@@ -15,7 +12,6 @@ function AirportAutocomplete() {
   const { suggestions, isLoading, isSearching } =
     AirportLookup(airportFilter);
 
-  // Select airport
   const handleSelect = (airport) => {
     setAirportFilter(airport.code);
     setSelectedAirport(airport);
@@ -23,7 +19,6 @@ function AirportAutocomplete() {
     setFocusedIndex(-1);
   };
 
-  // Keyboard navigation
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -80,44 +75,45 @@ function AirportAutocomplete() {
             placeholder="Search airport or city"
           />
         </div>
-        {isOpen && airportFilter.trim() !== "" && (
-          <div className="suggestions-dropdown">
-            {suggestions.length > 0 ? (
-              suggestions.map((airport, index) => (
-                <div
-                  key={airport.code}
-                  className={`suggestion-card ${focusedIndex === index ? "active" : ""
-                    }`}
-                  onMouseEnter={() => setFocusedIndex(index)}
-                  onClick={() => handleSelect(airport)}
-                >
-                  <div className="suggestion-header">
-                    <div className="code-city">
-                      <strong className="airport-code">
-                        {airport.code}
-                      </strong>
-                      <span className="airport-city">
-                        {airport.city}
-                      </span>
-                    </div>
-                    <span className="airport-country">
-                      {airport.country}
+        <div
+          className={`suggestions-dropdown ${isOpen && airportFilter.trim() !== "" ? "show" : ""
+            }`}
+        >
+          {suggestions.length > 0 ? (
+            suggestions.map((airport, index) => (
+              <div
+                key={airport.code}
+                className={`suggestion-card ${focusedIndex === index ? "active" : ""
+                  }`}
+                onMouseEnter={() => setFocusedIndex(index)}
+                onClick={() => handleSelect(airport)}
+              >
+                <div className="suggestion-header">
+                  <div className="code-city">
+                    <strong className="airport-code">
+                      {airport.code}
+                    </strong>
+                    <span className="airport-city">
+                      {airport.city}
                     </span>
                   </div>
-                  <p className="airport-name">
-                    {airport.name}
-                  </p>
+                  <span className="airport-country">
+                    {airport.country}
+                  </span>
                 </div>
-              ))
-            ) : (
-              !isLoading && !isSearching && (
-                <div className="suggestion-card">
-                  No airports match
-                </div>
-              )
-            )}
-          </div>
-        )}
+                <p className="airport-name">
+                  {airport.name}
+                </p>
+              </div>
+            ))
+          ) : (
+            !isLoading && !isSearching && (
+              <div className="suggestion-card">
+                No airports match
+              </div>
+            )
+          )}
+        </div>
         {selectedAirport && (
           <pre>
             {JSON.stringify(selectedAirport, null, 2)}

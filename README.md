@@ -1,16 +1,59 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Indian Airport Autocomplete
 
-Currently, two official plugins are available:
+## 1. Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A simple airport autocomplete application built using React.
+Users can search Indian airports using their IATA code or
+city name and select an airport from the suggestions.
 
-## React Compiler
+## 2. Technology Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- JavaScript (ES6+)
+- HTML
+- CSS
+- JSON
 
-## Expanding the ESLint configuration
+## 3. Why React?
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+I chose React.js because I have hands-on experience working with React and its hooks. It helped me build the autocomplete functionality using reusable components and manage state efficiently with useState and useEffect.
+
+## 4. Installation and Setup
+
+```bash
+npm install
+```
+
+## 5. Run the Project
+
+```bash
+npm run dev
+```
+
+## 6. Features
+
+- Search airports using IATA code or city name.
+- Case-insensitive substring matching.
+- Debounced search (250ms).
+- Display top 5 matching airports.
+- Show "No airports match" when there are no results.
+- Keyboard navigation.
+- Select an airport using mouse or keyboard.
+- Display selected airport as JSON.
+
+## 7. Technical Decisions
+
+### How does debouncing work?
+
+I used a 250ms debounce with setTimeout and clearTimeout to avoid filtering on every keystroke. This reduces unnecessary operations and improves the search experience.
+
+### How are keyboard and mouse navigation synced?
+
+I used a shared focusedIndex state to manage both keyboard navigation and mouse hover. This keeps the highlighted suggestion synchronized between both interactions.
+
+### How would you support 10,000 airports?
+
+I would introduce a search index to find matching airports more efficiently. This would improve search performance as the dataset grows.
+
+

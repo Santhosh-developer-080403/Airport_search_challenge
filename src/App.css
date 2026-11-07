@@ -4,7 +4,6 @@
   margin: 150px auto;
   position: relative;
   background: #095AB5;
-  background: linear-gradient(90deg, rgba(9, 90, 181, 1) 0%, rgba(25, 137, 225, 1) 61%, rgba(0, 212, 255, 1) 100%);
   padding: 20px;
   color: #fff;
   border-radius: 20px;
@@ -82,6 +81,36 @@
   align-items: center;
   margin-bottom: 2px;
 }
+
+.suggestions-dropdown {
+  margin-top: 6px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-15px);
+  pointer-events: none;
+
+  transition:
+    max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s ease-in-out,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    margin 0.6s ease;
+}
+
+.suggestions-dropdown.show {
+  max-height: 350px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  overflow-y: auto;
+  margin-top: 6px;
+}
+
 
 .code-city {
   display: flex;

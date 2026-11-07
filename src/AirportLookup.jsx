@@ -1,14 +1,14 @@
 
+
 import { useEffect, useState } from "react";
 
-function useAirportLookup(searchTerm) {
+function AirportLookup(searchTerm) {
 
     const [airports, setAirports] = useState([]);
-    const [suggestionsList, setSuggestionsList] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isSearching, setIsSearching] = useState(false);
 
-    // airport data
     useEffect(() => {
         fetch("/airports.json")
             .then((res) => {
@@ -20,11 +20,9 @@ function useAirportLookup(searchTerm) {
             .finally(() => setIsLoading(false));
     }, []);
 
-    // airport search
     useEffect(() => {
-
         if (!searchTerm.trim()) {
-            setSuggestionsList([]);
+            setSuggestions([]);
             setIsSearching(false);
             return;
         }
@@ -35,12 +33,12 @@ function useAirportLookup(searchTerm) {
                 airport.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 airport.name.toLowerCase().includes(searchTerm.toLowerCase()) 
             );
-            setSuggestionsList(filteredAirports.slice(0, 5));
+            setSuggestions(filteredAirports.slice(0, 5));
             setIsSearching(false);
         }, 250);
         return () => clearTimeout(timer);
     }, [searchTerm, airports]);
-    return { suggestionsList, isLoading, isSearching };
+    return { suggestions, isLoading, isSearching };
 }
 
-export default useAirportLookup;
+export default AirportLookup;
