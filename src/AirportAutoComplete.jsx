@@ -22,23 +22,33 @@ function AirportAutocomplete() {
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
+
       if (suggestions.length > 0) {
         setIsOpen(true);
         setFocusedIndex((prev) =>
-          Math.min(prev + 1, suggestions.length - 1)
+          prev < suggestions.length - 1 ? prev + 1 : 0
         );
       }
     }
-
-    if (e.key === "ArrowUp") {
+    else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setFocusedIndex((prev) => Math.max(prev - 1, 0));
+      if (suggestions.length > 0) {
+        setIsOpen(true);
+        setFocusedIndex((prev) =>
+          prev <= 0 ? suggestions.length - 1 : prev - 1
+        );
+      }
     }
-    if (e.key === "Enter" && focusedIndex >= 0) {
-      e.preventDefault();
-      handleSelect(suggestions[focusedIndex]);
+    else if (e.key === "Enter") {
+      if (
+        focusedIndex >= 0 &&
+        focusedIndex < suggestions.length
+      ) {
+        e.preventDefault();
+        handleSelect(suggestions[focusedIndex]);
+      }
     }
-    if (e.key === "Escape") {
+    else if (e.key === "Escape") {
       setIsOpen(false);
       setFocusedIndex(-1);
     }

@@ -28,7 +28,7 @@
   padding: 10px 12px;
   font-size: 15px;
   border: 1.5px solid #fff;
-  border-radius: 8px;
+  border-radius: 5px;
   outline: none;
   box-shadow: 0 0 0 3px rgba(112, 161, 255, 0.2);
   box-sizing: border-box;
@@ -52,7 +52,7 @@
   margin-top: 6px;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 5px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   max-height: 350px;
@@ -109,6 +109,12 @@
   pointer-events: auto;
   overflow-y: auto;
   margin-top: 6px;
+}
+
+.suggestion-card.active {
+  background-color: #dbeafe;
+  border: 1px solid #095AB5;
+  border-radius: 5px;
 }
 
 
